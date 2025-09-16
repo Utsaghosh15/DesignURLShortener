@@ -1,5 +1,5 @@
 const validator = require('validator');
-const Url = require('../../models/url');
+const Url = require('../../models/Url');
 
 
 const generateShortCode = () => {
@@ -75,7 +75,7 @@ const createURLController = async (req, res) => {
       res.status(200).json({
           success: true,
           message: 'URL created successfully',
-          shortURL: `http://localhost:3000/${shortCode}`,
+          shortURL: `http://localhost:3000/api/getURL/${shortCode}`,
           expiryDate: expiryDate.toISOString(),
           createdAt: new Date().toISOString() 
       });

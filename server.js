@@ -5,10 +5,9 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/database');
 
 
-// Imporrt Routes
+// Import Routes
 const createURLRoute = require('./routes/createURLRoute/createURLRoute.route');
-// const getURLRoute = require('../routes/getURLRoute/getURLRoute.route');
-
+const redirectURLRoute = require('./routes/redirectURLRoute/redirectURLRoute.route');
 
 const app = express();
 dotenv.config();
@@ -23,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/createURL', createURLRoute);
-// app.use('/api/getURL', getURLRoute);
+app.use('/api/getURL', redirectURLRoute);
 
 
 connectDB();
