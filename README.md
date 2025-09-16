@@ -78,6 +78,56 @@ The service includes comprehensive error handling:
 - **Expiration Handling**: Automatic cleanup of expired URLs
 - **HTTP Status Codes**: Proper REST API status codes
 
+
+#### Test Configuration
+
+The load test includes:
+- **30% URL Creation** - Tests `/api/createURL` endpoint
+- **70% URL Redirection** - Tests `/api/getURL/:shortCode` endpoint
+- **Performance Validation** - Checks response times and status codes
+- **Error Rate Monitoring** - Tracks failed requests
+
+#### Expected Results
+
+**Optimal Performance (1000 VUs):**
+- Throughput: ~732 requests/second
+- Response Time: ~235ms average
+- Success Rate: 100%
+- P95 Response Time: <820ms
+
+**Test Scenarios:**
+- **Light Load**: 10-50 VUs (development testing)
+- **Medium Load**: 100-500 VUs (staging testing)
+- **Heavy Load**: 1000+ VUs (production capacity testing)
+
+#### Test Files
+
+- `load-tests/k6-urlshortener.js` - Main K6 test script
+- `load-tests/env.json` - Test configuration and URLs
+
+### Docker Testing
+
+**Run tests against containerized app:**
+```bash
+# Start the application
+docker-compose up -d
+
+# Run load tests
+k6 run load-tests/k6-urlshortener.js
+
+# Stop the application
+docker-compose down
+```
+
+### Performance Benchmarks
+
+| Test Scenario | VUs | Duration | RPS | Avg Response Time | Success Rate |
+|---------------|-----|----------|-----|-------------------|--------------|
+| Light Load    | 10  | 30s      | ~10 | ~50ms            | 100%         |
+| Medium Load   | 100 | 30s      | ~100| ~100ms           | 100%         |
+| Heavy Load    | 1000| 30s      | ~732| ~235ms           | 100%         |
+| Stress Test   | 3000| 30s      | ~656| ~3.03s           | 100%         |
+
 ## 🔒 Security Features
 
 - **URL Validation**: Prevents malicious URL injection
