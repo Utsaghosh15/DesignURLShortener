@@ -28,7 +28,7 @@ const createURLController = async (req, res) => {
   
         if (!validator.isURL(url, {
           protocols: ['http', 'https'],
-          require_protocol: false,
+          require_protocol: true,
           require_valid_protocol: true,
           allow_underscores: false,
           allow_trailing_dot: false,
